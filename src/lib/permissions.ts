@@ -11,7 +11,8 @@ import {
   FolderKanban,
 } from 'lucide-react'
 
-const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel'] as const
+// TODO: remove 'stocks', 'fournisseurs', 'receptions', 'transferts' from free when going to prod
+const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts'] as const
 const STANDARD_MODULES = [
   ...FREE_MODULES,
   'tracabilite',
@@ -135,10 +136,10 @@ export const DEPARTMENTS: Department[] = [
     label: 'Achats',
     icon: Truck,
     modules: [
-      { key: 'fournisseurs', label: 'Fournisseurs', href: 'fournisseurs' },
-      { key: 'receptions', label: 'Réceptions', href: 'receptions' },
-      { key: 'stocks', label: 'Stocks', href: 'stocks' },
-      { key: 'transferts', label: 'Transferts', href: 'transferts' },
+      { key: 'fournisseurs', label: 'Fournisseurs', href: 'achats/fournisseurs' },
+      { key: 'receptions', label: 'Réceptions', href: 'achats/receptions' },
+      { key: 'stocks', label: 'Stocks', href: 'achats/stocks' },
+      { key: 'transferts', label: 'Transferts', href: 'achats/transferts' },
     ],
   },
   {
