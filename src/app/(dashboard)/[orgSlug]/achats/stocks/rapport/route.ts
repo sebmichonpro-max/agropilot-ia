@@ -226,7 +226,7 @@ export async function GET(
     .slice(0, 5)
 
   if (sortedByKm.length > 0) {
-    const currentY = (doc as unknown as Record<string, number>).lastAutoTable?.finalY ?? 120
+    const currentY = ((doc as unknown as Record<string, { finalY?: number }>).lastAutoTable?.finalY) ?? 120
 
     doc.setFontSize(13)
     doc.text('Top 5 palettes les plus critiques', 14, currentY + 12)

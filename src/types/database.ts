@@ -1,5 +1,5 @@
 export type PlanType = 'free' | 'standard' | 'premium'
-export type RoleType = 'owner' | 'admin' | 'member' | 'viewer'
+export type RoleType = 'owner' | 'admin' | 'manager' | 'member' | 'viewer'
 
 export interface Organization {
   id: string

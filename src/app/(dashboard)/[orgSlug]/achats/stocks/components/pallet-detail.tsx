@@ -37,16 +37,16 @@ export function PalletQuantityChart({ dailyCurve }: PalletDetailChartsProps) {
               <XAxis
                 dataKey="date"
                 tick={{ fontSize: 11 }}
-                tickFormatter={(v: string) => {
-                  const d = new Date(v)
+                tickFormatter={(v) => {
+                  const d = new Date(String(v))
                   return `${d.getDate()}/${d.getMonth() + 1}`
                 }}
               />
               <YAxis tick={{ fontSize: 11 }} />
               <Tooltip
-                formatter={(v: number) => [`${v.toFixed(1)} kg`, 'Quantité']}
-                labelFormatter={(l: string) =>
-                  new Date(l).toLocaleDateString('fr-FR')
+                formatter={(v) => [`${Number(v).toFixed(1)} kg`, 'Quantité']}
+                labelFormatter={(l) =>
+                  new Date(String(l)).toLocaleDateString('fr-FR')
                 }
               />
               <Line
@@ -80,16 +80,16 @@ export function PalletKmChart({ dailyCurve }: PalletDetailChartsProps) {
               <XAxis
                 dataKey="date"
                 tick={{ fontSize: 11 }}
-                tickFormatter={(v: string) => {
-                  const d = new Date(v)
+                tickFormatter={(v) => {
+                  const d = new Date(String(v))
                   return `${d.getDate()}/${d.getMonth() + 1}`
                 }}
               />
               <YAxis tick={{ fontSize: 11 }} />
               <Tooltip
-                formatter={(v: number) => [v.toFixed(4), 'Km']}
-                labelFormatter={(l: string) =>
-                  new Date(l).toLocaleDateString('fr-FR')
+                formatter={(v) => [Number(v).toFixed(4), 'Km']}
+                labelFormatter={(l) =>
+                  new Date(String(l)).toLocaleDateString('fr-FR')
                 }
               />
               <Line

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { ChevronDown, Lock, LogOut, Menu, X } from 'lucide-react'
+import { ChevronDown, Lock, LogOut, Menu, Settings, X } from 'lucide-react'
 import { createBrowserClient } from '@/lib/supabase/client'
 import { getDepartmentAccess } from '@/lib/permissions'
 import { Badge } from '@/components/ui/badge'
@@ -115,6 +115,13 @@ function SidebarContent({ org, profile }: SidebarProps) {
         <p className="mb-2 truncate px-3 text-xs text-muted-foreground">
           {profile.full_name}
         </p>
+        <Link
+          href={`/${org.slug}/settings`}
+          className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+        >
+          <Settings className="h-4 w-4" />
+          Paramètres
+        </Link>
         <button
           onClick={handleLogout}
           className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-600 hover:bg-red-50 hover:text-red-700 transition-colors"

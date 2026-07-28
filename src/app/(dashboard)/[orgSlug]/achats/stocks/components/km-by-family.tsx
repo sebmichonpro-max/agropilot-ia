@@ -41,7 +41,7 @@ export function KmByFamily({ data }: KmByFamilyProps) {
                 tick={{ fontSize: 11 }}
               />
               <Tooltip
-                formatter={(v: number) => [v.toFixed(4), 'Km moyen']}
+                formatter={(v) => [Number(v).toFixed(4), 'Km moyen']}
               />
               <Bar dataKey="avgKm" name="Km moyen" radius={[0, 4, 4, 0]}>
                 {sorted.map((entry, index) => (

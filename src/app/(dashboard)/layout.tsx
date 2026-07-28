@@ -25,6 +25,7 @@ export default async function DashboardLayout({
     const fullName =
       user.user_metadata?.full_name ?? user.email?.split('@')[0] ?? 'Mon'
     const orgName = `${fullName} Organisation`
+    const suffix = crypto.randomUUID().slice(0, 8)
     const slug =
       orgName
         .toLowerCase()
@@ -33,7 +34,7 @@ export default async function DashboardLayout({
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '') +
       '-' +
-      Date.now().toString(36)
+      suffix
 
     const { data: org } = await supabase
       .from('organizations')
