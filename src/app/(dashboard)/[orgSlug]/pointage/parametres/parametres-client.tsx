@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import type { RhPosition, RhAgency, RhSettings } from '@/types/database'
 import { PointageTabs } from '../components/pointage-tabs'
+import { AdminDialog } from '../components/admin-dialog'
 import {
   createPosition,
   deletePosition,
@@ -24,7 +25,7 @@ interface ParametresClientProps {
   agencies: RhAgency[]
   settings: RhSettings
   orgSlug: string
-  isAdmin: boolean
+  canBeAdmin: boolean
 }
 
 export function ParametresClient({
@@ -32,7 +33,7 @@ export function ParametresClient({
   agencies,
   settings,
   orgSlug,
-  isAdmin,
+  canBeAdmin,
 }: ParametresClientProps) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
@@ -154,7 +155,7 @@ export function ParametresClient({
   return (
     <div>
       <h1 className="text-2xl font-semibold text-ap-green-900 mb-4">Point&apos;age</h1>
-      <PointageTabs orgSlug={orgSlug} isAdmin={isAdmin} />
+      <PointageTabs orgSlug={orgSlug} isAdmin={true} />
 
       <div className="grid gap-8 max-w-2xl">
         {/* POSTES */}

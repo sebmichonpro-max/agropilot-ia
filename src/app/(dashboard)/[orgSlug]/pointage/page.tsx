@@ -29,7 +29,7 @@ export default async function PointagePage({
 
   if (!profile?.organization_id) return null
 
-  const isAdmin = ['owner', 'admin'].includes(profile.role)
+  const canBeAdmin = ['owner', 'admin'].includes(profile.role)
 
   const todayStart = new Date()
   todayStart.setHours(0, 0, 0, 0)
@@ -67,7 +67,7 @@ export default async function PointagePage({
       agencies={agenciesRes.data ?? []}
       positions={positionsRes.data ?? []}
       orgSlug={orgSlug}
-      isAdmin={isAdmin}
+      canBeAdmin={canBeAdmin}
     />
   )
 }

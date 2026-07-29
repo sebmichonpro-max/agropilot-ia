@@ -29,7 +29,7 @@ export default async function ParametresPage({
 
   if (!profile?.organization_id) return null
 
-  const isAdmin = ['owner', 'admin'].includes(profile.role)
+  const canBeAdmin = ['owner', 'admin'].includes(profile.role)
 
   const [positionsRes, agenciesRes, settingsRes] = await Promise.all([
     supabase
@@ -65,7 +65,7 @@ export default async function ParametresPage({
       agencies={agenciesRes.data ?? []}
       settings={settings!}
       orgSlug={orgSlug}
-      isAdmin={isAdmin}
+      canBeAdmin={canBeAdmin}
     />
   )
 }

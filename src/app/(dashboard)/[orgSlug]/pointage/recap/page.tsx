@@ -29,7 +29,7 @@ export default async function RecapPage({
 
   if (!profile?.organization_id) return null
 
-  const isAdmin = ['owner', 'admin'].includes(profile.role)
+  const canBeAdmin = ['owner', 'admin'].includes(profile.role)
 
   const [employeesRes, agenciesRes] = await Promise.all([
     supabase
@@ -51,7 +51,7 @@ export default async function RecapPage({
       employees={employeesRes.data ?? []}
       agencies={agenciesRes.data ?? []}
       orgSlug={orgSlug}
-      isAdmin={isAdmin}
+      canBeAdmin={canBeAdmin}
     />
   )
 }

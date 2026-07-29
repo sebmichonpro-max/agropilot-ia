@@ -1,11 +1,12 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import type { RhEmployee, RhClockEvent, RhAgency, RhPosition } from '@/types/database'
 import { PointageTabs } from './pointage-tabs'
 import { RhKpiCards } from './rh-kpi-cards'
 import { EmployeeGrid } from './employee-grid'
+import { AdminDialog } from './admin-dialog'
 
 interface PointageClientProps {
   employees: RhEmployee[]
@@ -13,7 +14,7 @@ interface PointageClientProps {
   agencies: RhAgency[]
   positions: RhPosition[]
   orgSlug: string
-  isAdmin: boolean
+  canBeAdmin: boolean
 }
 
 export function PointageClient({
@@ -22,11 +23,12 @@ export function PointageClient({
   agencies,
   positions,
   orgSlug,
-  isAdmin,
+  canBeAdmin,
 }: PointageClientProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const isKiosk = searchParams.get('mode') === 'kiosk'
+  const [isAdminMode, setIsAdminMode] = useState(false)
 
   const handleRefresh = useCallback(() => {
     router.refresh()
@@ -36,8 +38,13 @@ export function PointageClient({
     <div className={isKiosk ? 'max-w-5xl mx-auto px-4 py-6' : ''}>
       {!isKiosk && (
         <>
-          <h1 className="text-2xl font-semibold text-ap-green-900 mb-4">Point&apos;age</h1>
-          <PointageTabs orgSlug={orgSlug} isAdmin={isAdmin} />
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-2xl font-semibold text-ap-green-900">Point&apos;age</h1>
+            {canBeAdmin && (
+              <AdminDialog isAdminMode={isAdminMode} onToggle={setIsAdminMode} />
+            )}
+          </div>
+          <PointageTabs orgSlug={orgSlug} isAdmin={isAdminMode} />
           <RhKpiCards employees={employees} events={events} />
         </>
       )}
@@ -48,7 +55,7 @@ export function PointageClient({
         agencies={agencies}
         positions={positions}
         orgSlug={orgSlug}
-        isAdmin={isAdmin}
+        isAdmin={isAdminMode}
         isKiosk={isKiosk}
         onRefresh={handleRefresh}
       />

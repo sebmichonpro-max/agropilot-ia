@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import type { RhEmployee, RhAbsence, AbsenceType } from '@/types/database'
 import { PointageTabs } from '../components/pointage-tabs'
+import { AdminDialog } from '../components/admin-dialog'
 import { createAbsence, updateAbsenceStatus } from '../actions'
 
 const ABSENCE_TYPES: { value: AbsenceType; label: string; color: string }[] = [
@@ -30,12 +31,13 @@ interface CongesClientProps {
   employees: RhEmployee[]
   absences: RhAbsence[]
   orgSlug: string
-  isAdmin: boolean
+  canBeAdmin: boolean
 }
 
-export function CongesClient({ employees, absences, orgSlug, isAdmin }: CongesClientProps) {
+export function CongesClient({ employees, absences, orgSlug, canBeAdmin }: CongesClientProps) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
+  const [isAdminMode, setIsAdminMode] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [filterType, setFilterType] = useState('all')
 
@@ -102,8 +104,13 @@ export function CongesClient({ employees, absences, orgSlug, isAdmin }: CongesCl
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-ap-green-900 mb-4">Point&apos;age</h1>
-      <PointageTabs orgSlug={orgSlug} isAdmin={isAdmin} />
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-semibold text-ap-green-900">Point&apos;age</h1>
+        {canBeAdmin && (
+          <AdminDialog isAdminMode={isAdminMode} onToggle={setIsAdminMode} />
+        )}
+      </div>
+      <PointageTabs orgSlug={orgSlug} isAdmin={isAdminMode} />
 
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-3 mb-4">
@@ -205,7 +212,7 @@ export function CongesClient({ employees, absences, orgSlug, isAdmin }: CongesCl
               <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${statusInfo.color}`}>
                 {statusInfo.label}
               </span>
-              {isAdmin && absence.status === 'pending' && (
+              {isAdminMode && absence.status === 'pending' && (
                 <div className="flex gap-1">
                   <button
                     onClick={() => handleStatusChange(absence.id, 'approved')}
