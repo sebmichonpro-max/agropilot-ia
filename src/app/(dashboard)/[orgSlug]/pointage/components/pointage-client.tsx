@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useCallback, useTransition } from 'react'
+import { useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import type { RhEmployee, RhClockEvent, RhAgency } from '@/types/database'
+import type { RhEmployee, RhClockEvent, RhAgency, RhPosition } from '@/types/database'
 import { PointageTabs } from './pointage-tabs'
 import { RhKpiCards } from './rh-kpi-cards'
 import { EmployeeGrid } from './employee-grid'
@@ -11,6 +11,7 @@ interface PointageClientProps {
   employees: RhEmployee[]
   events: RhClockEvent[]
   agencies: RhAgency[]
+  positions: RhPosition[]
   orgSlug: string
   isAdmin: boolean
 }
@@ -19,6 +20,7 @@ export function PointageClient({
   employees,
   events,
   agencies,
+  positions,
   orgSlug,
   isAdmin,
 }: PointageClientProps) {
@@ -44,6 +46,7 @@ export function PointageClient({
         employees={employees}
         events={events}
         agencies={agencies}
+        positions={positions}
         orgSlug={orgSlug}
         isAdmin={isAdmin}
         isKiosk={isKiosk}

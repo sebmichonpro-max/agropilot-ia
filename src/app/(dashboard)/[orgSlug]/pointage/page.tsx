@@ -1,5 +1,5 @@
 import { createServerClient } from '@/lib/supabase/server'
-import type { RhEmployee, RhClockEvent, RhAgency, Profile } from '@/types/database'
+import type { RhEmployee, RhClockEvent, RhAgency, RhPosition, Profile } from '@/types/database'
 import { PointageClient } from './components/pointage-client'
 
 export const dynamic = 'force-dynamic'
@@ -34,7 +34,7 @@ export default async function PointagePage({
   const todayStart = new Date()
   todayStart.setHours(0, 0, 0, 0)
 
-  const [employeesRes, eventsRes, agenciesRes] = await Promise.all([
+  const [employeesRes, eventsRes, agenciesRes, positionsRes] = await Promise.all([
     supabase
       .from('rh_employees')
       .select('*')
@@ -53,6 +53,11 @@ export default async function PointagePage({
       .select('*')
       .order('name')
       .returns<RhAgency[]>(),
+    supabase
+      .from('rh_positions')
+      .select('*')
+      .order('sort_order')
+      .returns<RhPosition[]>(),
   ])
 
   return (
@@ -60,6 +65,7 @@ export default async function PointagePage({
       employees={employeesRes.data ?? []}
       events={eventsRes.data ?? []}
       agencies={agenciesRes.data ?? []}
+      positions={positionsRes.data ?? []}
       orgSlug={orgSlug}
       isAdmin={isAdmin}
     />
