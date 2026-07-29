@@ -14,8 +14,6 @@ export function KmGauge({ value, level, size = 180 }: KmGaugeProps) {
   const info = KM_LEVELS[level]
   const color = getKmColor(level)
 
-  // Map Km value to angle (0 to 180 degrees)
-  // 0 = left, 180 = right
   const maxKm = 2.0
   const clampedValue = Math.min(value, maxKm)
   const angle = (clampedValue / maxKm) * 180
@@ -46,15 +44,13 @@ export function KmGauge({ value, level, size = 180 }: KmGaugeProps) {
         height={size / 2 + 20}
         viewBox={`0 0 ${size} ${size / 2 + 20}`}
       >
-        {/* Background arc */}
         <path
           d={`M ${bgX1} ${bgY1} A ${radius} ${radius} 0 1 1 ${bgX2} ${bgY2}`}
           fill="none"
-          stroke="#e5e7eb"
+          stroke="#e3dac8"
           strokeWidth={12}
           strokeLinecap="round"
         />
-        {/* Value arc */}
         {angle > 0 && (
           <path
             d={`M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`}
@@ -64,7 +60,6 @@ export function KmGauge({ value, level, size = 180 }: KmGaugeProps) {
             strokeLinecap="round"
           />
         )}
-        {/* Center value */}
         <text
           x={cx}
           y={cy - 4}
@@ -81,7 +76,7 @@ export function KmGauge({ value, level, size = 180 }: KmGaugeProps) {
       >
         {info.label}
       </span>
-      <span className="text-xs text-muted-foreground mt-0.5">
+      <span className="text-xs text-ap-cream-700 mt-0.5">
         {info.description}
       </span>
     </div>

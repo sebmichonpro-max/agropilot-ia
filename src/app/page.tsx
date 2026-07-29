@@ -28,43 +28,47 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between px-6 py-4 border-b">
-        <h1 className="text-xl font-bold text-emerald-900">SMAPIA</h1>
+    <div className="flex min-h-screen flex-col bg-ap-cream-50">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-ap-cream-200">
+        <h1 className="text-xl font-bold text-ap-green-900">AgroPilot.IA</h1>
         <div className="flex items-center gap-3">
           <Link href="/login">
-            <Button variant="ghost">Se connecter</Button>
+            <Button variant="ghost" className="text-ap-green-600 hover:bg-ap-green-50 hover:text-ap-green-900">
+              Se connecter
+            </Button>
           </Link>
           <Link href="/register">
-            <Button>Commencer gratuitement</Button>
+            <Button className="bg-ap-green-900 text-ap-green-100 hover:bg-ap-green-800">
+              Commencer gratuitement
+            </Button>
           </Link>
         </div>
       </header>
 
       <main className="flex flex-1 flex-col items-center justify-center px-4 text-center">
-        <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-          SMAPIA
+        <h2 className="text-4xl font-bold tracking-tight text-ap-green-900 sm:text-5xl md:text-6xl">
+          AgroPilot.IA
         </h2>
-        <p className="mt-4 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+        <p className="mt-4 max-w-2xl text-lg text-ap-cream-800 sm:text-xl">
           Le SaaS léger pour PME agroalimentaires. Qualité, traçabilité,
           production et conformité — dans un seul outil simple.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link href="/register">
-            <Button size="lg" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-auto bg-ap-green-900 text-ap-green-100 hover:bg-ap-green-800">
               Commencer gratuitement
             </Button>
           </Link>
           <Link href="/login">
-            <Button size="lg" variant="outline" className="w-full sm:w-auto">
+            <Button size="lg" variant="outline" className="w-full sm:w-auto border-ap-green-200 text-ap-green-600 hover:bg-ap-green-50">
               Se connecter
             </Button>
           </Link>
         </div>
       </main>
 
-      <footer className="border-t px-6 py-4 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} SMAPIA — Gestion intelligente pour
+      <footer className="border-t border-ap-cream-200 px-6 py-4 text-center text-sm text-ap-cream-700">
+        © {new Date().getFullYear()} AgroPilot.IA — Gestion intelligente pour
         l&apos;agroalimentaire
       </footer>
     </div>

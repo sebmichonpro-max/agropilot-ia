@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { createBrowserClient } from '@/lib/supabase/client'
 import { registerSchema } from '@/lib/validation/auth'
 import { Button } from '@/components/ui/button'
@@ -11,7 +10,6 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 
 export default function RegisterPage() {
-  const router = useRouter()
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -52,17 +50,17 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <Card>
+      <Card className="border-ap-cream-200 rounded-xl">
         <CardContent className="space-y-4 text-center">
-          <h2 className="text-xl font-semibold text-emerald-900">
+          <h2 className="text-xl font-medium text-ap-green-900">
             Compte créé !
           </h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-ap-cream-800">
             Vérifiez votre boîte email pour confirmer votre compte, puis
             connectez-vous.
           </p>
           <Link href="/login">
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full border-ap-green-200 text-ap-green-600 hover:bg-ap-green-50">
               Retour à la connexion
             </Button>
           </Link>
@@ -72,17 +70,17 @@ export default function RegisterPage() {
   }
 
   return (
-    <Card>
+    <Card className="border-ap-cream-200 rounded-xl">
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
-          <h2 className="text-xl font-semibold">Créer mon compte</h2>
+          <h2 className="text-xl font-medium text-ap-green-900">Créer mon compte</h2>
 
           {error && (
-            <p className="text-sm text-destructive">{error}</p>
+            <p className="text-sm text-red-700">{error}</p>
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="fullName">Nom complet</Label>
+            <Label htmlFor="fullName" className="text-sm font-medium text-ap-green-900">Nom complet</Label>
             <Input
               id="fullName"
               type="text"
@@ -91,11 +89,12 @@ export default function RegisterPage() {
               onChange={(e) => setFullName(e.target.value)}
               required
               autoComplete="name"
+              className="border-ap-cream-300 focus:ring-ap-green-500 focus:border-ap-green-500"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-sm font-medium text-ap-green-900">Email</Label>
             <Input
               id="email"
               type="email"
@@ -104,11 +103,12 @@ export default function RegisterPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
+              className="border-ap-cream-300 focus:ring-ap-green-500 focus:border-ap-green-500"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Mot de passe</Label>
+            <Label htmlFor="password" className="text-sm font-medium text-ap-green-900">Mot de passe</Label>
             <Input
               id="password"
               type="password"
@@ -117,10 +117,11 @@ export default function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="new-password"
+              className="border-ap-cream-300 focus:ring-ap-green-500 focus:border-ap-green-500"
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full bg-ap-green-900 text-ap-green-100 hover:bg-ap-green-800" disabled={loading}>
             {loading ? 'Création...' : 'Créer mon compte'}
           </Button>
         </CardContent>
@@ -128,7 +129,7 @@ export default function RegisterPage() {
         <CardFooter className="text-sm">
           <Link
             href="/login"
-            className="text-muted-foreground hover:text-foreground"
+            className="text-ap-cream-700 hover:text-ap-green-900 transition-colors"
           >
             Déjà un compte ? Se connecter
           </Link>

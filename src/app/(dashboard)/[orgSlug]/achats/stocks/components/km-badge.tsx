@@ -1,6 +1,5 @@
-import { Badge } from '@/components/ui/badge'
 import { KM_LEVELS } from '@/modules/km/constants'
-import { formatKm, getKmBgClass } from '@/modules/km/formatters'
+import { formatKm, getKmBgClass, getKmTextClass } from '@/modules/km/formatters'
 import type { KmLevel } from '@/modules/km/types'
 
 interface KmBadgeProps {
@@ -13,10 +12,10 @@ export function KmBadge({ value, level, showValue = true }: KmBadgeProps) {
   const info = KM_LEVELS[level]
 
   return (
-    <Badge
-      className={`${getKmBgClass(level)} text-white border-0`}
+    <span
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getKmBgClass(level)} ${getKmTextClass(level)}`}
     >
       {showValue ? `${formatKm(value)} — ${info.label}` : info.label}
-    </Badge>
+    </span>
   )
 }

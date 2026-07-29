@@ -5,7 +5,7 @@ import type { Organization, Profile, PlanType } from '@/types/database'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Paramètres — SMAPIA',
+  title: 'Paramètres — AgroPilot.IA',
 }
 
 export default async function SettingsPage({
@@ -42,38 +42,38 @@ export default async function SettingsPage({
   return (
     <ModuleLayout title="Paramètres">
       <div className="grid gap-6 md:grid-cols-2">
-        <Card>
+        <Card className="border-ap-cream-200 rounded-xl">
           <CardHeader>
-            <CardTitle>Organisation</CardTitle>
+            <CardTitle className="text-lg font-medium text-ap-green-900">Organisation</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div>
-              <p className="text-sm text-muted-foreground">Nom</p>
-              <p className="font-medium">{org.name}</p>
+              <p className="text-xs text-ap-cream-700">Nom</p>
+              <p className="font-medium text-ap-green-900">{org.name}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Slug</p>
-              <p className="font-medium">{org.slug}</p>
+              <p className="text-xs text-ap-cream-700">Slug</p>
+              <p className="font-medium text-ap-green-900">{org.slug}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Plan</p>
-              <p className="font-medium capitalize">{planLabels[org.plan as PlanType]}</p>
+              <p className="text-xs text-ap-cream-700">Plan</p>
+              <p className="font-medium text-ap-green-900 capitalize">{planLabels[org.plan as PlanType]}</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-ap-cream-200 rounded-xl">
           <CardHeader>
-            <CardTitle>Mon profil</CardTitle>
+            <CardTitle className="text-lg font-medium text-ap-green-900">Mon profil</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div>
-              <p className="text-sm text-muted-foreground">Nom</p>
-              <p className="font-medium">{profile.full_name ?? '—'}</p>
+              <p className="text-xs text-ap-cream-700">Nom</p>
+              <p className="font-medium text-ap-green-900">{profile.full_name ?? '—'}</p>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Rôle</p>
-              <p className="font-medium capitalize">{profile.role}</p>
+              <p className="text-xs text-ap-cream-700">Rôle</p>
+              <p className="font-medium text-ap-green-900 capitalize">{profile.role}</p>
             </div>
           </CardContent>
         </Card>

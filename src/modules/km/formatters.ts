@@ -49,13 +49,13 @@ export function getKmBadgeVariant(
 export function getKmColor(level: KmLevel): string {
   switch (level) {
     case 'excellent':
-      return '#10b981'
+      return '#234d38'
     case 'good':
-      return '#3b82f6'
+      return '#1a3a2a'
     case 'warning':
-      return '#f59e0b'
+      return '#854f0b'
     case 'critical':
-      return '#ef4444'
+      return '#a32d2d'
     case 'destruction':
       return '#7f1d1d'
   }
@@ -64,44 +64,44 @@ export function getKmColor(level: KmLevel): string {
 export function getKmBgClass(level: KmLevel): string {
   switch (level) {
     case 'excellent':
-      return 'bg-emerald-500'
+      return 'bg-ap-green-100'
     case 'good':
-      return 'bg-blue-500'
+      return 'bg-ap-green-300'
     case 'warning':
-      return 'bg-amber-500'
+      return 'bg-amber-50'
     case 'critical':
-      return 'bg-red-500'
+      return 'bg-red-50'
     case 'destruction':
-      return 'bg-red-900'
+      return 'bg-red-100'
   }
 }
 
 export function getKmTextClass(level: KmLevel): string {
   switch (level) {
     case 'excellent':
-      return 'text-emerald-700'
+      return 'text-ap-green-800'
     case 'good':
-      return 'text-blue-700'
+      return 'text-ap-green-900'
     case 'warning':
-      return 'text-amber-700'
+      return 'text-amber-800'
     case 'critical':
-      return 'text-red-700'
+      return 'text-red-800'
     case 'destruction':
-      return 'text-red-950'
+      return 'text-red-900'
   }
 }
 
 export function getKmBorderClass(level: KmLevel): string {
   switch (level) {
     case 'excellent':
-      return 'border-emerald-500'
+      return 'border-ap-green-200'
     case 'good':
-      return 'border-blue-500'
+      return 'border-ap-green-300'
     case 'warning':
-      return 'border-amber-500'
+      return 'border-amber-300'
     case 'critical':
-      return 'border-red-500'
+      return 'border-red-300'
     case 'destruction':
-      return 'border-red-900'
+      return 'border-red-500'
   }
 }

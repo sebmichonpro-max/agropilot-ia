@@ -45,17 +45,17 @@ export default function LoginPage() {
   }
 
   return (
-    <Card>
+    <Card className="border-ap-cream-200 rounded-xl">
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
-          <h2 className="text-xl font-semibold">Se connecter</h2>
+          <h2 className="text-xl font-medium text-ap-green-900">Se connecter</h2>
 
           {error && (
-            <p className="text-sm text-destructive">{error}</p>
+            <p className="text-sm text-red-700">{error}</p>
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-sm font-medium text-ap-green-900">Email</Label>
             <Input
               id="email"
               type="email"
@@ -64,11 +64,12 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
+              className="border-ap-cream-300 focus:ring-ap-green-500 focus:border-ap-green-500"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Mot de passe</Label>
+            <Label htmlFor="password" className="text-sm font-medium text-ap-green-900">Mot de passe</Label>
             <Input
               id="password"
               type="password"
@@ -77,10 +78,11 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="current-password"
+              className="border-ap-cream-300 focus:ring-ap-green-500 focus:border-ap-green-500"
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full bg-ap-green-900 text-ap-green-100 hover:bg-ap-green-800" disabled={loading}>
             {loading ? 'Connexion...' : 'Se connecter'}
           </Button>
         </CardContent>
@@ -88,13 +90,13 @@ export default function LoginPage() {
         <CardFooter className="flex flex-col gap-2 text-sm">
           <Link
             href="/reset-password"
-            className="text-muted-foreground hover:text-foreground"
+            className="text-ap-cream-700 hover:text-ap-green-900 transition-colors"
           >
             Mot de passe oublié ?
           </Link>
           <Link
             href="/register"
-            className="text-emerald-700 hover:text-emerald-900 font-medium"
+            className="text-ap-green-700 hover:text-ap-green-900 font-medium transition-colors"
           >
             Créer un compte
           </Link>

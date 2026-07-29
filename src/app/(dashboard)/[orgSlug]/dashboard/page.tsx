@@ -1,13 +1,12 @@
 import { createServerClient } from '@/lib/supabase/server'
 import { ModuleLayout } from '@/components/shared/module-layout'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import type { Organization, Profile, PlanType } from '@/types/database'
 import type { Metadata } from 'next'
 import { DEPARTMENTS } from '@/lib/permissions'
 
 export const metadata: Metadata = {
-  title: 'Tableau de bord — SMAPIA',
+  title: 'Tableau de bord — AgroPilot.IA',
 }
 
 export default async function DashboardPage({
@@ -43,7 +42,6 @@ export default async function DashboardPage({
     premium: 'Premium',
   }
 
-  const activeDeptCount = DEPARTMENTS.length
   const freeModules = ['dashboard', 'produits', 'calculateur-nutritionnel']
   const activeModuleCount = DEPARTMENTS.reduce((count, dept) => {
     return (
@@ -69,48 +67,48 @@ export default async function DashboardPage({
 
   return (
     <ModuleLayout title="Tableau de bord">
-      <p className="text-lg text-muted-foreground">
-        Bienvenue sur SMAPIA, {org.name}
+      <p className="text-lg text-ap-cream-800">
+        Bienvenue sur AgroPilot.IA, {org.name}
       </p>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <Card>
+        <Card className="border-ap-cream-200 rounded-xl">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-sm font-medium text-ap-cream-700">
               Plan actuel
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge className="text-lg capitalize">
+            <span className="inline-flex items-center rounded-full bg-ap-green-100 px-2.5 py-0.5 text-xs font-medium text-ap-green-800 capitalize">
               {planLabels[org.plan as PlanType]}
-            </Badge>
+            </span>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-ap-cream-200 rounded-xl">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-sm font-medium text-ap-cream-700">
               Modules actifs
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">
+            <p className="text-2xl font-medium text-ap-green-900">
               {activeModuleCount}{' '}
-              <span className="text-sm font-normal text-muted-foreground">
+              <span className="text-sm font-normal text-ap-cream-700">
                 / {totalModules}
               </span>
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-ap-cream-200 rounded-xl">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="text-sm font-medium text-ap-cream-700">
               Départements
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{activeDeptCount}</p>
+            <p className="text-2xl font-medium text-ap-green-900">{DEPARTMENTS.length}</p>
           </CardContent>
         </Card>
       </div>

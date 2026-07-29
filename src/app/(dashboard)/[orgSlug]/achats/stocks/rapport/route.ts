@@ -138,8 +138,8 @@ export async function GET(
 
   // ─── PAGE 1: Cover ───
   doc.setFontSize(28)
-  doc.setTextColor(6, 95, 70) // emerald-900
-  doc.text('SMAPIA', pageWidth / 2, 60, { align: 'center' })
+  doc.setTextColor(26, 58, 42) // ap-green-900
+  doc.text('AgroPilot.IA', pageWidth / 2, 60, { align: 'center' })
 
   doc.setFontSize(18)
   doc.setTextColor(0, 0, 0)
@@ -356,7 +356,7 @@ export async function GET(
   doc.setFontSize(8)
   doc.setTextColor(150, 150, 150)
   doc.text(
-    'Rapport généré par SMAPIA — Coefficient Michon © 2026 — Ne constitue pas un conseil financier',
+    'Rapport généré par AgroPilot.IA — Coefficient Michon © 2026 — Ne constitue pas un conseil financier',
     pageWidth / 2,
     pageHeight - 10,
     { align: 'center' }

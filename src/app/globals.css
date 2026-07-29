@@ -46,75 +46,65 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* AgroPilot.IA — Vert */
+  --color-ap-green-50: #f0f9f3;
+  --color-ap-green-100: #e0f2e7;
+  --color-ap-green-200: #c2e5cf;
+  --color-ap-green-300: #95d1ae;
+  --color-ap-green-400: #6db88f;
+  --color-ap-green-500: #4a9a72;
+  --color-ap-green-600: #3a7d5c;
+  --color-ap-green-700: #2d6148;
+  --color-ap-green-800: #234d38;
+  --color-ap-green-900: #1a3a2a;
+
+  /* AgroPilot.IA — Crème */
+  --color-ap-cream-50: #fdfcf9;
+  --color-ap-cream-100: #f7f4ed;
+  --color-ap-cream-200: #f0ebe0;
+  --color-ap-cream-300: #e3dac8;
+  --color-ap-cream-400: #cfc2a8;
+  --color-ap-cream-500: #b8a888;
+  --color-ap-cream-600: #998b70;
+  --color-ap-cream-700: #7a6f58;
+  --color-ap-cream-800: #5c5340;
+  --color-ap-cream-900: #3d3728;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --background: #fdfcf9;
+  --foreground: #1a3a2a;
+  --card: #ffffff;
+  --card-foreground: #1a3a2a;
+  --popover: #ffffff;
+  --popover-foreground: #1a3a2a;
+  --primary: #1a3a2a;
+  --primary-foreground: #e0f2e7;
+  --secondary: #f0f9f3;
+  --secondary-foreground: #1a3a2a;
+  --muted: #f7f4ed;
+  --muted-foreground: #7a6f58;
+  --accent: #f0ebe0;
+  --accent-foreground: #1a3a2a;
+  --destructive: #a32d2d;
+  --border: #f0ebe0;
+  --input: #e3dac8;
+  --ring: #4a9a72;
+  --chart-1: #1a3a2a;
+  --chart-2: #4a9a72;
+  --chart-3: #95d1ae;
+  --chart-4: #e3dac8;
+  --chart-5: #7a6f58;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar: #1a3a2a;
+  --sidebar-foreground: #e0f2e7;
+  --sidebar-primary: #e0f2e7;
+  --sidebar-primary-foreground: #1a3a2a;
+  --sidebar-accent: rgba(255, 255, 255, 0.1);
+  --sidebar-accent-foreground: #e0f2e7;
+  --sidebar-border: rgba(255, 255, 255, 0.12);
+  --sidebar-ring: #4a9a72;
 }
 
 @layer base {

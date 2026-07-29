@@ -14,7 +14,7 @@ import { getKmDashboardData } from './actions'
 import { buildDailyCurve, calculateWeightedAverageKm } from '@/modules/km/calculator'
 
 export const metadata: Metadata = {
-  title: 'Stocks & Coefficient Michon — SMAPIA',
+  title: 'Stocks & Coefficient Michon — AgroPilot.IA',
 }
 
 export default async function StocksPage({
