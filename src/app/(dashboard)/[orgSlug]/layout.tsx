@@ -31,7 +31,6 @@ export default async function OrgLayout({
     .from('organizations')
     .select('*')
     .eq('id', profile.organization_id)
-    .is('deleted_at', null)
     .single<Organization>()
 
   if (!org || org.slug !== orgSlug) notFound()

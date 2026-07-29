@@ -4,24 +4,33 @@ import { createServerClient } from '@/lib/supabase/server'
 import { Button } from '@/components/ui/button'
 import type { Profile, Organization } from '@/types/database'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const supabase = await createServerClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (user) {
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('organization_id')
       .eq('id', user.id)
       .single<Pick<Profile, 'organization_id'>>()
 
+    if (profileError) {
+      console.error('Profile fetch error:', profileError.message)
+    }
+
     if (profile?.organization_id) {
-      const { data: org } = await supabase
+      const { data: org, error: orgError } = await supabase
         .from('organizations')
         .select('slug')
         .eq('id', profile.organization_id)
-        .is('deleted_at', null)
         .single<Pick<Organization, 'slug'>>()
+
+      if (orgError) {
+        console.error('Org fetch error:', orgError.message)
+      }
 
       if (org) redirect(`/${org.slug}/dashboard`)
     }

@@ -28,7 +28,6 @@ export default async function SettingsPage({
     .from('organizations')
     .select('*')
     .eq('slug', orgSlug)
-    .is('deleted_at', null)
     .single<Organization>()
 
   if (!org || !profile) return null

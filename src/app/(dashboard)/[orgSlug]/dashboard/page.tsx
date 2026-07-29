@@ -31,7 +31,6 @@ export default async function DashboardPage({
     .from('organizations')
     .select('*')
     .eq('slug', orgSlug)
-    .is('deleted_at', null)
     .single<Organization>()
 
   if (!org || !profile) return null
