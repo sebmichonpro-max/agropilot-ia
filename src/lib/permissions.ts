@@ -12,7 +12,8 @@ import {
 } from 'lucide-react'
 
 // TODO: remove 'stocks', 'fournisseurs', 'receptions', 'transferts' from free when going to prod
-const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts'] as const
+// TODO: remove dev-only modules (stocks, fournisseurs, receptions, transferts, pointage, conges) from free when going to prod
+const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges'] as const
 const STANDARD_MODULES = [
   ...FREE_MODULES,
   'tracabilite',
