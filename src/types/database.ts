@@ -216,3 +216,103 @@ export interface SimulationResults {
   isForfaitJour: boolean
   tauxJournalier: number
 }
+
+// ── PROD'PULSE (TRS/OEE) ──────────────────────────────
+
+export type StopCategory = 'availability' | 'performance' | 'quality'
+export type TrsLevel = 'excellent' | 'good' | 'warning' | 'critical'
+
+export interface ProductionLine {
+  id: string
+  organization_id: string
+  name: string
+  hourly_cost_cents: number
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface PpProduct {
+  id: string
+  organization_id: string
+  name: string
+  cycle_time_ms: number
+  unit_label: string
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface LineProduct {
+  id: string
+  organization_id: string
+  line_id: string
+  product_id: string
+  cycle_time_override_ms: number | null
+}
+
+export interface StopCause {
+  id: string
+  organization_id: string
+  name: string
+  category: StopCategory
+  icon: string
+  display_order: number
+  is_planned: boolean
+  is_active: boolean
+  created_at: string
+  deleted_at: string | null
+}
+
+export interface ProductionSession {
+  id: string
+  organization_id: string
+  line_id: string
+  product_id: string
+  started_at: string
+  ended_at: string | null
+  qty_produced: number | null
+  qty_conforming: number | null
+  cycle_time_used_ms: number
+  trs: number | null
+  availability: number | null
+  performance: number | null
+  quality: number | null
+  trs_level: TrsLevel | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface ProductionStop {
+  id: string
+  organization_id: string
+  session_id: string
+  cause_id: string
+  started_at: string
+  ended_at: string | null
+  duration_seconds: number | null
+  notes: string | null
+  created_at: string
+}
+
+export interface TrsThreshold {
+  id: string
+  organization_id: string
+  excellent_min: number
+  good_min: number
+  warning_min: number
+  updated_at: string
+}
+
+export interface OpeningHour {
+  id: string
+  organization_id: string
+  line_id: string | null
+  day_of_week: number
+  start_time: string
+  end_time: string
+  created_at: string
+}

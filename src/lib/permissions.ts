@@ -14,7 +14,7 @@ import {
 // TODO: remove 'stocks', 'fournisseurs', 'receptions', 'transferts' from free when going to prod
 // TODO: remove dev-only modules (stocks, fournisseurs, receptions, transferts, pointage, conges) from free when going to prod
 // TODO: remove dev-only modules from free when going to prod
-const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire'] as const
+const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire', 'prod-pulse'] as const
 const STANDARD_MODULES = [
   ...FREE_MODULES,
   'tracabilite',
@@ -33,7 +33,7 @@ const PREMIUM_MODULES = [
   'api',
   'ordres-fabrication',
   'planning',
-  'trs',
+  'prod-pulse',
   'pointage',
   'simulateur-salaire',
   'coefficient-michon',
@@ -99,7 +99,7 @@ export const DEPARTMENTS: Department[] = [
     modules: [
       { key: 'ordres-fabrication', label: 'Ordres de fabrication', href: 'ordres-fabrication' },
       { key: 'planning', label: 'Planning', href: 'planning' },
-      { key: 'trs', label: 'TRS', href: 'trs' },
+      { key: 'prod-pulse', label: "Prod'Pulse", href: 'prod-pulse' },
     ],
   },
   {
