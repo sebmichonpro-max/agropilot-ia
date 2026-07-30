@@ -137,3 +137,82 @@ export interface RhSettings {
   created_at: string
   updated_at: string
 }
+
+// ── SIMUL'PAIE ──────────────────────────────
+
+export type SimDuration = '35h' | '37h30' | '39h' | 'forfait_jour'
+export type SimStatut = 'non_cadre' | 'cadre'
+export type SimMode = 'employeur' | 'salarie'
+
+export interface SimSettings {
+  id: string
+  organization_id: string
+  company_name: string | null
+  at_mp_rate_bps: number
+  mutual_employer_cents: number
+  mutual_employee_cents: number
+  prevoyance_employer_rate_bps: number
+  prevoyance_employee_rate_bps: number
+  fnal_rate_bps: number
+  formation_rate_bps: number
+  transport_rate_bps: number
+  headcount: number
+  created_at: string
+  updated_at: string
+}
+
+export interface SimSimulation {
+  id: string
+  organization_id: string
+  label: string
+  inputs: SimulationInputs
+  results: SimulationResults
+  created_by: string | null
+  created_at: string
+}
+
+export interface SimulationInputs {
+  mode: SimMode
+  duration: SimDuration
+  hourlyRate: number
+  salaryAnnual: number
+  coefficient: number
+  statut: SimStatut
+  seniority: number
+  treizieme: boolean
+  primeExceptionnelle: number
+  forfaitJours: number
+  extraHS: number
+}
+
+export interface CotisationLine {
+  label: string
+  category: string
+  base: number
+  rateSal: number
+  montantSal: number
+  ratePat: number
+  montantPat: number
+}
+
+export interface SimulationResults {
+  brut: number
+  baseSalary: number
+  hsAmount: number
+  hsMonthly: number
+  anciennete: number
+  treizieme: number
+  primeExceptionnelle: number
+  cotisationsSalariales: number
+  cotisationsPatronales: number
+  rgdu: number
+  netAvantImpot: number
+  coutEmployeur: number
+  coutAnnuel: number
+  detail: CotisationLine[]
+  rtt: number
+  mutuellePatronale: number
+  mutuelleSalariale: number
+  isForfaitJour: boolean
+  tauxJournalier: number
+}

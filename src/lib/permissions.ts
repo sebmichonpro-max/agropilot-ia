@@ -13,7 +13,8 @@ import {
 
 // TODO: remove 'stocks', 'fournisseurs', 'receptions', 'transferts' from free when going to prod
 // TODO: remove dev-only modules (stocks, fournisseurs, receptions, transferts, pointage, conges) from free when going to prod
-const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges'] as const
+// TODO: remove dev-only modules from free when going to prod
+const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire'] as const
 const STANDARD_MODULES = [
   ...FREE_MODULES,
   'tracabilite',
