@@ -9,12 +9,13 @@ import {
   TrendingUp,
   Truck,
   FolderKanban,
+  Calculator,
 } from 'lucide-react'
 
 // TODO: remove 'stocks', 'fournisseurs', 'receptions', 'transferts' from free when going to prod
 // TODO: remove dev-only modules (stocks, fournisseurs, receptions, transferts, pointage, conges) from free when going to prod
 // TODO: remove dev-only modules from free when going to prod
-const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire', 'prod-pulse'] as const
+const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire', 'prod-pulse', 'marge-flash'] as const
 const STANDARD_MODULES = [
   ...FREE_MODULES,
   'tracabilite',
@@ -34,6 +35,7 @@ const PREMIUM_MODULES = [
   'ordres-fabrication',
   'planning',
   'prod-pulse',
+  'marge-flash',
   'pointage',
   'simulateur-salaire',
   'coefficient-michon',
@@ -100,6 +102,14 @@ export const DEPARTMENTS: Department[] = [
       { key: 'ordres-fabrication', label: 'Ordres de fabrication', href: 'ordres-fabrication' },
       { key: 'planning', label: 'Planning', href: 'planning' },
       { key: 'prod-pulse', label: "Prod'Pulse", href: 'prod-pulse' },
+    ],
+  },
+  {
+    key: 'finance',
+    label: 'Finance',
+    icon: Calculator,
+    modules: [
+      { key: 'marge-flash', label: 'Marge Flash', href: 'marge-flash' },
     ],
   },
   {

@@ -316,3 +316,153 @@ export interface OpeningHour {
   end_time: string
   created_at: string
 }
+
+// ── MARGE FLASH ──────────────────────────────
+
+export type MarginLevel = 'good' | 'warning' | 'critical' | 'loss'
+export type ImportSourceType = 'excel' | 'pdf'
+
+export interface ProductCategory {
+  id: string
+  organization_id: string
+  name: string
+  created_at: string
+  deleted_at: string | null
+}
+
+export interface Customer {
+  id: string
+  organization_id: string
+  name: string
+  created_at: string
+  deleted_at: string | null
+}
+
+export interface Ingredient {
+  id: string
+  organization_id: string
+  name: string
+  category: string | null
+  unit: string
+  price_cents: number
+  supplier: string | null
+  price_updated_at: string
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface IngredientPriceHistory {
+  id: string
+  ingredient_id: string
+  price_cents: number
+  effective_date: string
+  created_at: string
+}
+
+export interface PackagingItem {
+  id: string
+  organization_id: string
+  name: string
+  packaging_type: string | null
+  unit: string
+  unit_price_cents: number
+  supplier: string | null
+  price_updated_at: string
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface LaborPole {
+  id: string
+  organization_id: string
+  name: string
+  default_headcount: number
+  hourly_rate_cents: number
+  display_order: number
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface ProductSheet {
+  id: string
+  organization_id: string
+  name: string
+  category_id: string | null
+  customer_id: string | null
+  selling_price_cents: number | null
+  theoretical_output_per_hour: number | null
+  line_id: string | null
+  mp_cost_cents: number | null
+  packaging_cost_cents: number | null
+  labor_cost_cents: number | null
+  total_cost_cents: number | null
+  margin_cents: number | null
+  margin_rate_bps: number | null
+  margin_level: MarginLevel | null
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface RecipeLine {
+  id: string
+  organization_id: string
+  product_sheet_id: string
+  ingredient_id: string
+  quantity: number
+  unit: string
+  line_cost_cents: number | null
+  display_order: number
+  created_at: string
+}
+
+export interface PackagingLine {
+  id: string
+  organization_id: string
+  product_sheet_id: string
+  packaging_item_id: string
+  quantity_per_product: number
+  line_cost_cents: number | null
+  display_order: number
+  created_at: string
+}
+
+export interface ProductLabor {
+  id: string
+  organization_id: string
+  product_sheet_id: string
+  pole_id: string
+  headcount_override: number | null
+  rate_override_cents: number | null
+  created_at: string
+}
+
+export interface MarginThreshold {
+  id: string
+  organization_id: string
+  good_min_bps: number
+  warning_min_bps: number
+  price_freshness_days: number
+  updated_at: string
+}
+
+export interface ImportLog {
+  id: string
+  organization_id: string
+  source_type: ImportSourceType
+  document_type: string
+  file_name: string
+  file_path: string | null
+  items_created: number
+  items_updated: number
+  items_errored: number
+  imported_by: string | null
+  created_at: string
+}
