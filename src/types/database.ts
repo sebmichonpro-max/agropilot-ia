@@ -466,3 +466,233 @@ export interface ImportLog {
   imported_by: string | null
   created_at: string
 }
+
+// ── PREV'PROD — Prévisions de fabrication ───────────────
+
+export type PrevStockType = 'stock_permanent' | 'sur_commande' | 'mixte'
+export type PrevDispatchPriority = 'matin' | 'journee' | 'avance'
+export type PrevForecastMethod = 'dernier_jour' | 'moyenne_4sem' | 'moyenne_ponderee'
+export type PrevOrderType = 'commande' | 'devis'
+export type PrevOrderStatus = 'en_attente' | 'confirme'
+export type PrevPlanStatus = 'draft' | 'validated' | 'in_progress' | 'done'
+export type PrevClientType = 'stock_brand' | 'custom_order'
+export type PrevImportType = 'commandes' | 'devis' | 'stocks' | 'referentiel'
+export type PrevModificationType = 'ajout' | 'suppression' | 'modification'
+export type PrevModificationStatus = 'pending' | 'integrated' | 'ignored' | 'deferred'
+
+export interface PrevLine {
+  id: string
+  organization_id: string
+  name: string
+  compatible_weights_grams: number[]
+  max_capacity_grams: number | null
+  sort_order: number
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface PrevMixer {
+  id: string
+  organization_id: string
+  name: string
+  capacity_grams: number
+  sort_order: number
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface PrevRecipe {
+  id: string
+  organization_id: string
+  code: string
+  name: string
+  brand: string | null
+  stock_type: PrevStockType
+  dispatch_priority: PrevDispatchPriority
+  forecast_method: PrevForecastMethod
+  coverage_j1_pct: number
+  min_batch_grams: number
+  min_batch_exception: boolean
+  loss_pct: number
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface PrevProduct {
+  id: string
+  organization_id: string
+  code: string
+  label: string
+  recipe_id: string
+  weight_grams: number
+  format_label: string
+  compatible_line_ids: string[] | null
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface PrevClient {
+  id: string
+  organization_id: string
+  code: string
+  name: string
+  client_type: PrevClientType
+  brand: string | null
+  dispatch_priority: PrevDispatchPriority
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface PrevHoliday {
+  id: string
+  organization_id: string
+  date: string
+  label: string
+  auto_generated: boolean
+}
+
+export interface PrevSalesHistory {
+  id: string
+  organization_id: string
+  product_id: string
+  sale_date: string
+  quantity_pieces: number
+  total_weight_grams: number
+  created_at: string
+}
+
+export interface PrevStockSnapshot {
+  id: string
+  organization_id: string
+  product_id: string
+  snapshot_date: string
+  stock_pieces: number
+  dlc: string | null
+  lot: string | null
+  created_at: string
+}
+
+export interface PrevImportBatch {
+  id: string
+  organization_id: string
+  import_type: PrevImportType
+  filename: string | null
+  source: 'csv' | 'manual'
+  row_count: number | null
+  matched_count: number | null
+  unmatched_count: number | null
+  imported_at: string
+  imported_by: string | null
+}
+
+export interface PrevOrder {
+  id: string
+  organization_id: string
+  import_batch_id: string
+  order_type: PrevOrderType
+  delivery_date: string
+  product_id: string | null
+  client_id: string | null
+  product_code_raw: string
+  product_label_raw: string
+  quantity_pieces: number
+  quantity_colis: number | null
+  total_weight_grams: number
+  unit_price_gross_cents: number | null
+  unit_price_net_cents: number | null
+  probability_pct: number
+  status: PrevOrderStatus
+  matched: boolean
+  created_at: string
+}
+
+export interface PrevDailyPlan {
+  id: string
+  organization_id: string
+  plan_date: string
+  status: PrevPlanStatus
+  validated_at: string | null
+  validated_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface PrevPlanRequirement {
+  id: string
+  plan_id: string
+  recipe_id: string
+  stock_target_pieces: number | null
+  coverage_j1_pieces: number | null
+  orders_pieces: number | null
+  quotes_weighted_pieces: number | null
+  current_stock_pieces: number | null
+  gross_requirement_pieces: number
+  net_requirement_pieces: number
+  total_weight_grams: number
+  total_weight_with_loss_grams: number
+  below_threshold: boolean
+  threshold_forced: boolean
+  forecast_method_used: string
+  created_at: string
+}
+
+export interface PrevPlanLineItem {
+  id: string
+  plan_id: string
+  line_id: string
+  mixer_id: string | null
+  recipe_id: string
+  product_id: string
+  format_label: string
+  weight_per_piece_grams: number
+  quantity_pieces: number
+  total_weight_grams: number
+  loss_weight_grams: number
+  sort_order: number
+  is_morning_priority: boolean
+  is_rupture_priority: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface PrevPlanModification {
+  id: string
+  plan_id: string
+  modification_type: PrevModificationType
+  description: string
+  source_order_id: string | null
+  impact_weight_grams: number | null
+  status: PrevModificationStatus
+  created_at: string
+  resolved_at: string | null
+  resolved_by: string | null
+}
+
+// ── VEILLE QUALITÉ ──────────────────────────────
+
+export interface VeilleReport {
+  id: string
+  organization_id: string
+  scanner_id: string
+  content: string
+  created_at: string
+  created_by: string | null
+}
+
+export interface VeilleSearch {
+  id: string
+  organization_id: string
+  query: string
+  content: string
+  created_at: string
+  created_by: string | null
+}

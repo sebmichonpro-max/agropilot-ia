@@ -15,7 +15,7 @@ import {
 // TODO: remove 'stocks', 'fournisseurs', 'receptions', 'transferts' from free when going to prod
 // TODO: remove dev-only modules (stocks, fournisseurs, receptions, transferts, pointage, conges) from free when going to prod
 // TODO: remove dev-only modules from free when going to prod
-const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire', 'prod-pulse', 'marge-flash'] as const
+const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire', 'prod-pulse', 'marge-flash', 'prev-prod', 'veille-qualite'] as const
 const STANDARD_MODULES = [
   ...FREE_MODULES,
   'tracabilite',
@@ -92,6 +92,7 @@ export const DEPARTMENTS: Department[] = [
       { key: 'non-conformites', label: 'Non-conformités', href: 'non-conformites' },
       { key: 'audits', label: 'Audits', href: 'audits' },
       { key: 'tracabilite', label: 'Traçabilité', href: 'tracabilite' },
+      { key: 'veille-qualite', label: 'Veille Qualité', href: 'veille-qualite' },
     ],
   },
   {
@@ -102,6 +103,7 @@ export const DEPARTMENTS: Department[] = [
       { key: 'ordres-fabrication', label: 'Ordres de fabrication', href: 'ordres-fabrication' },
       { key: 'planning', label: 'Planning', href: 'planning' },
       { key: 'prod-pulse', label: "Prod'Pulse", href: 'prod-pulse' },
+      { key: 'prev-prod', label: "Prev'Prod", href: 'prev-prod' },
     ],
   },
   {
