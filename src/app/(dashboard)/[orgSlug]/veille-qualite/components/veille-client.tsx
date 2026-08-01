@@ -110,7 +110,10 @@ export function VeilleClient({ orgSlug, reports, searches }: VeilleClientProps) 
       signal: controller.signal,
     })
 
-    if (!res.ok) throw new Error(`Erreur ${res.status}`)
+    if (!res.ok) {
+      const errorBody = await res.json().catch(() => null)
+      throw new Error(errorBody?.error || `Erreur ${res.status}`)
+    }
     if (!res.body) throw new Error('Pas de stream')
 
     const reader = res.body.getReader()
