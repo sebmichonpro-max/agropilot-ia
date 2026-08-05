@@ -586,7 +586,7 @@ export interface PrevImportBatch {
   organization_id: string
   import_type: PrevImportType
   filename: string | null
-  source: 'csv' | 'manual'
+  source: 'csv' | 'manual' | 'divalto_tiers' | 'divalto_article'
   row_count: number | null
   matched_count: number | null
   unmatched_count: number | null

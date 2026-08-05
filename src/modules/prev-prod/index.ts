@@ -3,6 +3,19 @@ export type { RequirementInput, RequirementResult, ProductBreakdown } from './re
 export { parseOrdersCsv, parseStocksCsv, extractDateFromFilename } from './csv-parser'
 export type { RawOrderRow, RawStockRow, CsvParseResult, CsvError } from './csv-parser'
 export {
+  parseDivaltoExport,
+  computeNeeds,
+  buildProductClientMappings,
+} from './divalto-parser'
+export type {
+  DivaltoFormat,
+  DivaltoParseResult,
+  DivaltoTiersRecord,
+  DivaltoArticleRecord,
+  AggregatedNeed,
+  ProductClientMapping,
+} from './divalto-parser'
+export {
   STOCK_TYPE_LABELS,
   PRIORITY_LABELS,
   FORECAST_METHOD_LABELS,

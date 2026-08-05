@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Plus, Pencil, Trash2, FileUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import type { PrevProduct, PrevRecipe, PrevLine } from '@/types/database'
-import { createPrevProduct, updatePrevProduct, deletePrevProduct } from '../../actions'
+import { createPrevProduct, updatePrevProduct, deletePrevProduct, importProductsCsv } from '../../actions'
+import { CsvDropZone } from './csv-drop-zone'
 
 interface ConfigPrevProductsProps {
   orgSlug: string
@@ -18,6 +19,7 @@ interface ConfigPrevProductsProps {
 
 export function ConfigPrevProducts({ orgSlug, products, recipes, lines }: ConfigPrevProductsProps) {
   const [showForm, setShowForm] = useState(false)
+  const [showImport, setShowImport] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
 
@@ -94,10 +96,35 @@ export function ConfigPrevProducts({ orgSlug, products, recipes, lines }: Config
     <div>
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-ap-cream-700">{products.length} produit(s) / SKU</p>
-        <Button onClick={openCreate} className="gap-2" disabled={recipes.length === 0}>
-          <Plus className="h-4 w-4" /> Ajouter
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => { setShowImport(true); setShowForm(false) }} className="gap-2">
+            <FileUp className="h-4 w-4" /> Importer CSV
+          </Button>
+          <Button onClick={openCreate} className="gap-2" disabled={recipes.length === 0}>
+            <Plus className="h-4 w-4" /> Ajouter
+          </Button>
+        </div>
       </div>
+
+      {showImport && (
+        <CsvDropZone
+          hint="Export Divalto « Tri par Tiers » (COMMANDES.csv). Extrait les produits uniques avec code, désignation et poids déduit du libellé. Les produits existants sont ignorés."
+          encodingHint="Encodage CP1252 auto-détecté"
+          useCp1252
+          isPending={isPending}
+          onClose={() => setShowImport(false)}
+          onImport={(text) => {
+            startTransition(async () => {
+              const result = await importProductsCsv(orgSlug, text)
+              if ('error' in result) toast.error(result.error)
+              else {
+                toast.success(`${result.created} produit(s) créé(s), ${result.skipped} ignoré(s)`)
+                setShowImport(false)
+              }
+            })
+          }}
+        />
+      )}
 
       {recipes.length === 0 && (
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 mb-4 text-sm text-amber-800">

@@ -1,14 +1,15 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Plus, Pencil, Trash2, FileUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import type { PrevClient } from '@/types/database'
 import { PRIORITY_LABELS } from '@/modules/prev-prod'
-import { createClient, updateClient, deleteClient } from '../../actions'
+import { createClient, updateClient, deleteClient, importClientsCsv } from '../../actions'
+import { CsvDropZone } from './csv-drop-zone'
 
 interface ConfigClientsProps {
   orgSlug: string
@@ -17,6 +18,7 @@ interface ConfigClientsProps {
 
 export function ConfigClients({ orgSlug, clients }: ConfigClientsProps) {
   const [showForm, setShowForm] = useState(false)
+  const [showImport, setShowImport] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
 
@@ -81,10 +83,35 @@ export function ConfigClients({ orgSlug, clients }: ConfigClientsProps) {
     <div>
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-ap-cream-700">{clients.length} client(s)</p>
-        <Button onClick={openCreate} className="gap-2">
-          <Plus className="h-4 w-4" /> Ajouter
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => { setShowImport(true); setShowForm(false) }} className="gap-2">
+            <FileUp className="h-4 w-4" /> Importer CSV
+          </Button>
+          <Button onClick={openCreate} className="gap-2">
+            <Plus className="h-4 w-4" /> Ajouter
+          </Button>
+        </div>
       </div>
+
+      {showImport && (
+        <CsvDropZone
+          hint="Export Divalto « Tri par Tiers » (COMMANDES.csv). Extrait les clients uniques (code 7-8 chiffres + nom). Les clients existants sont ignorés."
+          encodingHint="Encodage CP1252 auto-détecté"
+          useCp1252
+          isPending={isPending}
+          onClose={() => setShowImport(false)}
+          onImport={(text) => {
+            startTransition(async () => {
+              const result = await importClientsCsv(orgSlug, text)
+              if ('error' in result) toast.error(result.error)
+              else {
+                toast.success(`${result.created} client(s) créé(s), ${result.skipped} ignoré(s)`)
+                setShowImport(false)
+              }
+            })
+          }}
+        />
+      )}
 
       {showForm && (
         <div className="rounded-xl border border-ap-cream-200 bg-white p-5 mb-4">

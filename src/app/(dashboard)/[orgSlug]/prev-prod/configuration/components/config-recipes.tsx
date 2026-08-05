@@ -1,14 +1,15 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Plus, Pencil, Trash2, FileUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { toast } from 'sonner'
 import type { PrevRecipe } from '@/types/database'
 import { STOCK_TYPE_LABELS, PRIORITY_LABELS, FORECAST_METHOD_LABELS } from '@/modules/prev-prod'
-import { createRecipe, updateRecipe, deleteRecipe } from '../../actions'
+import { createRecipe, updateRecipe, deleteRecipe, importRecipesCsv } from '../../actions'
+import { CsvDropZone } from './csv-drop-zone'
 
 interface ConfigRecipesProps {
   orgSlug: string
@@ -17,6 +18,7 @@ interface ConfigRecipesProps {
 
 export function ConfigRecipes({ orgSlug, recipes }: ConfigRecipesProps) {
   const [showForm, setShowForm] = useState(false)
+  const [showImport, setShowImport] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
 
@@ -105,10 +107,33 @@ export function ConfigRecipes({ orgSlug, recipes }: ConfigRecipesProps) {
     <div>
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-ap-cream-700">{recipes.length} recette(s)</p>
-        <Button onClick={openCreate} className="gap-2">
-          <Plus className="h-4 w-4" /> Ajouter
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => { setShowImport(true); setShowForm(false) }} className="gap-2">
+            <FileUp className="h-4 w-4" /> Importer CSV
+          </Button>
+          <Button onClick={openCreate} className="gap-2">
+            <Plus className="h-4 w-4" /> Ajouter
+          </Button>
+        </div>
       </div>
+
+      {showImport && (
+        <CsvDropZone
+          hint="Fichier NOMENCLATURE.csv avec colonnes : code_recette;nom_recette;lot_kg. Extrait les recettes uniques avec code, nom et quantité lot. Les recettes existantes sont ignorées."
+          isPending={isPending}
+          onClose={() => setShowImport(false)}
+          onImport={(text) => {
+            startTransition(async () => {
+              const result = await importRecipesCsv(orgSlug, text)
+              if ('error' in result) toast.error(result.error)
+              else {
+                toast.success(`${result.created} recette(s) créée(s), ${result.skipped} ignorée(s)`)
+                setShowImport(false)
+              }
+            })
+          }}
+        />
+      )}
 
       {showForm && (
         <div className="rounded-xl border border-ap-cream-200 bg-white p-5 mb-4">
