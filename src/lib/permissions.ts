@@ -15,7 +15,7 @@ import {
 // TODO: remove 'stocks', 'fournisseurs', 'receptions', 'transferts' from free when going to prod
 // TODO: remove dev-only modules (stocks, fournisseurs, receptions, transferts, pointage, conges) from free when going to prod
 // TODO: remove dev-only modules from free when going to prod
-const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire', 'prod-pulse', 'marge-flash', 'prev-prod', 'veille-qualite'] as const
+const FREE_MODULES = ['dashboard', 'produits', 'calculateur-nutritionnel', 'stocks', 'fournisseurs', 'receptions', 'transferts', 'pointage', 'conges', 'simulateur-salaire', 'prod-pulse', 'marge-flash', 'prev-prod', 'veille-qualite', 'coefficient-michon'] as const
 const STANDARD_MODULES = [
   ...FREE_MODULES,
   'tracabilite',
@@ -112,6 +112,7 @@ export const DEPARTMENTS: Department[] = [
     icon: Calculator,
     modules: [
       { key: 'marge-flash', label: 'Marge Flash', href: 'marge-flash' },
+      { key: 'coefficient-michon', label: 'Coefficient Michon', href: 'coefficient-michon' },
     ],
   },
   {
@@ -121,7 +122,6 @@ export const DEPARTMENTS: Department[] = [
     modules: [
       { key: 'pointage', label: 'Pointage', href: 'pointage' },
       { key: 'simulateur-salaire', label: 'Simulateur salaire', href: 'simulateur-salaire' },
-      { key: 'coefficient-michon', label: 'Coefficient Michon', href: 'coefficient-michon' },
       { key: 'conges', label: 'Congés', href: 'conges' },
     ],
   },
