@@ -696,3 +696,274 @@ export interface VeilleSearch {
   created_at: string
   created_by: string | null
 }
+
+// ── PRODUITS ──────────────────────────────
+
+export type AllergenCode =
+  | 'gluten' | 'crustaces' | 'oeufs' | 'poissons' | 'arachides'
+  | 'soja' | 'lait' | 'fruits_a_coque' | 'celeri' | 'moutarde'
+  | 'sesame' | 'sulfites' | 'lupin' | 'mollusques'
+
+export type AllergenPresence = 'contains' | 'may_contain' | 'none'
+
+export interface Product {
+  id: string
+  organization_id: string
+  name: string
+  reference: string | null
+  description: string | null
+  unit: string
+  weight_grams: number | null
+  barcode: string | null
+  shelf_life_days: number | null
+  storage_conditions: string | null
+  image_url: string | null
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface ProductIngredient {
+  id: string
+  organization_id: string
+  product_id: string
+  name: string
+  percentage: number | null
+  allergens: AllergenCode[]
+  display_order: number
+  created_at: string
+}
+
+export interface ProductAllergen {
+  id: string
+  organization_id: string
+  product_id: string
+  allergen_code: AllergenCode
+  presence: AllergenPresence
+  created_at: string
+}
+
+export interface NutritionalValues {
+  id: string
+  organization_id: string
+  product_id: string
+  energy_kj: number | null
+  energy_kcal: number | null
+  fat_g: number | null
+  saturated_fat_g: number | null
+  carbohydrates_g: number | null
+  sugars_g: number | null
+  fiber_g: number | null
+  protein_g: number | null
+  salt_g: number | null
+  created_at: string
+  updated_at: string
+}
+
+// ── FOURNISSEURS ──────────────────────────────
+
+export type SupplierStatus = 'active' | 'pending' | 'suspended' | 'inactive'
+
+export interface Supplier {
+  id: string
+  organization_id: string
+  name: string
+  contact_name: string | null
+  email: string | null
+  phone: string | null
+  address: string | null
+  city: string | null
+  postal_code: string | null
+  country: string
+  siret: string | null
+  status: SupplierStatus
+  approval_date: string | null
+  next_audit_date: string | null
+  notes: string | null
+  is_active: boolean
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+// ── TRAÇABILITÉ ──────────────────────────────
+
+export type LotStatus = 'received' | 'in_production' | 'finished' | 'shipped' | 'recalled'
+
+export interface Lot {
+  id: string
+  organization_id: string
+  lot_number: string
+  product_id: string | null
+  supplier_id: string | null
+  status: LotStatus
+  quantity: number | null
+  unit: string | null
+  reception_date: string | null
+  production_date: string | null
+  dlc: string | null
+  ddm: string | null
+  temperature_reception: number | null
+  visual_check_ok: boolean | null
+  notes: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface Shipment {
+  id: string
+  organization_id: string
+  shipment_number: string
+  customer_name: string
+  shipped_at: string
+  lot_ids: string[]
+  notes: string | null
+  created_by: string | null
+  created_at: string
+}
+
+// ── HACCP ──────────────────────────────
+
+export type HazardType = 'biological' | 'chemical' | 'physical'
+export type CcpStatus = 'active' | 'inactive'
+
+export interface HaccpPlan {
+  id: string
+  organization_id: string
+  name: string
+  product_id: string | null
+  process_description: string | null
+  is_active: boolean
+  created_by: string | null
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface HaccpCcp {
+  id: string
+  organization_id: string
+  plan_id: string
+  step_name: string
+  hazard_type: HazardType
+  hazard_description: string
+  critical_limit: string
+  monitoring_method: string
+  monitoring_frequency: string
+  corrective_action: string
+  verification_method: string | null
+  status: CcpStatus
+  display_order: number
+  created_at: string
+  updated_at: string
+}
+
+export interface HaccpControl {
+  id: string
+  organization_id: string
+  ccp_id: string
+  measured_value: string
+  is_within_limit: boolean
+  corrective_action_taken: string | null
+  controlled_by: string | null
+  controlled_at: string
+  notes: string | null
+  created_at: string
+}
+
+// ── ÉTIQUETAGE ──────────────────────────────
+
+export interface ProductLabel {
+  id: string
+  organization_id: string
+  product_id: string
+  label_name: string
+  denomination: string
+  ingredients_text: string
+  allergens_highlighted: string
+  net_quantity: string
+  dlc_ddm: string | null
+  storage_conditions: string | null
+  origin_country: string | null
+  operator_name: string | null
+  operator_address: string | null
+  lot_number: string | null
+  nutritional_declaration: string | null
+  is_compliant: boolean | null
+  compliance_notes: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+// ── NON-CONFORMITÉS ──────────────────────────────
+
+export type NcSource = 'internal' | 'supplier' | 'customer'
+export type NcSeverity = 'minor' | 'major' | 'critical'
+export type NcStatus = 'open' | 'analysis' | 'action' | 'verification' | 'closed'
+
+export interface NonConformity {
+  id: string
+  organization_id: string
+  nc_number: string
+  title: string
+  description: string
+  source: NcSource
+  severity: NcSeverity
+  status: NcStatus
+  product_id: string | null
+  lot_id: string | null
+  supplier_id: string | null
+  root_cause: string | null
+  corrective_action: string | null
+  preventive_action: string | null
+  deadline: string | null
+  closed_at: string | null
+  created_by: string | null
+  assigned_to: string | null
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+// ── AUDITS ──────────────────────────────
+
+export type AuditType = 'internal' | 'client' | 'certification'
+export type AuditStatus = 'planned' | 'in_progress' | 'completed' | 'cancelled'
+export type AuditCheckStatus = 'conforming' | 'minor_nc' | 'major_nc' | 'not_applicable'
+
+export interface Audit {
+  id: string
+  organization_id: string
+  audit_number: string
+  title: string
+  audit_type: AuditType
+  status: AuditStatus
+  planned_date: string
+  completed_date: string | null
+  auditor_name: string | null
+  scope: string | null
+  overall_score: number | null
+  findings_summary: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+  deleted_at: string | null
+}
+
+export interface AuditCheckItem {
+  id: string
+  organization_id: string
+  audit_id: string
+  category: string
+  question: string
+  check_status: AuditCheckStatus
+  comment: string | null
+  evidence: string | null
+  display_order: number
+  created_at: string
+}
