@@ -112,7 +112,7 @@ export const DEPARTMENTS: Department[] = [
     icon: Calculator,
     modules: [
       { key: 'marge-flash', label: 'Marge Flash', href: 'marge-flash' },
-      { key: 'coefficient-michon', label: 'Coefficient Michon', href: 'coefficient-michon' },
+      { key: 'coefficient-michon', label: 'Coefficient Michon', href: 'achats/stocks' },
     ],
   },
   {
